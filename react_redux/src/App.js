@@ -2,8 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from "react-redux";
-import { startAction } from "actions/startAction";
-import { stopAction } from "actions/stopAction";
+import rotateAction from "actions/rotateAction";
 
 class App extends React.Component {
   render() {
@@ -19,7 +18,7 @@ class App extends React.Component {
             }
             alt="logo" 
             onClick={
-              this.props.rotating ? this.props.stopAction : this.props.startAction
+              () => this.props.rotateAction(!this.props.rotating)
             }
           />
           <p>
@@ -44,8 +43,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startAction: () => dispatch(startAction),
-  stopAction: () => dispatch(stopAction)
+  rotateAction: (payload) => dispatch(rotateAction(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
